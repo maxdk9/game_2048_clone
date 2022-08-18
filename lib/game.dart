@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
+import 'package:game_2048_clone/components/button.dart';
+import 'package:game_2048_clone/components/empty_board.dart';
 import 'package:game_2048_clone/components/score_board.dart';
 
 import 'const/colors.dart';
@@ -13,7 +15,6 @@ class Game extends ConsumerStatefulWidget {
 }
 
 class _GameState extends ConsumerState<Game> with WidgetsBindingObserver {
-
   @override
   void initState() {
     //Add an Observer for the Lifecycles of the App
@@ -56,11 +57,24 @@ class _GameState extends ConsumerState<Game> with WidgetsBindingObserver {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         const ScoreBoard(),
-                        const SizedBox(height: 30.0,),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
                         Row(
                           children: [
-                            //TODO: Add the Undo button
-                            //TODO: Add the New Game button
+                            ButtonWidget(
+                                icon: Icons.undo,
+                                onPressed: () {
+                                  //undo the round
+                                }),
+                            const SizedBox(
+                              width: 15.0,
+                            ),
+                            ButtonWidget(
+                                icon: Icons.refresh,
+                                onPressed: () {
+                                  //restart the game
+                                }),
                           ],
                         )
                       ],
@@ -68,7 +82,9 @@ class _GameState extends ConsumerState<Game> with WidgetsBindingObserver {
                   ],
                 ),
               ),
-              //TODO: Add the Empty Board Widget
+              const SizedBox(height: 30.0,),
+
+              Stack(children:[const EmptyBoardWidget(),] ),
             ],
           ),
         ),
